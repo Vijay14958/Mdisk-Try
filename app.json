@@ -1,5 +1,5 @@
 {
-  "name": "Channel-Mdisk-Converter",
+  "name": "Mdisk-Try",
   "description": "Make short link by using Shortener using API key",
   "stack": "container",
   "logo": "https://i.ibb.co/1mwchh9/Screenshot-2022-07-08-at-11-06-34-AM.png",
@@ -22,7 +22,7 @@
       "description": "Get this value from https://my.telegram.org",
       "value": ""
     },
-    "DROPLINK_API": {
+    "SHORTURLLINK_API": {
       "description": "Enter your DROPLINK API KEY only if METHOD is selected to droplink. Get your API from https://droplink.co/member/tools/api",
       "value": "0"
     },
