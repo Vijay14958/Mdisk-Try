@@ -13,7 +13,7 @@ Ex: `/batch -100xxx`
 
 START_MESSAGE = '''Hello, {}
 
-I'm a Bot to Convert Other MDisk Links to your MDisk Links or Short Other Links to Droplink.co Links by Using your API. 
+I'm a Bot to Convert Other MDisk Links to your MDisk Links or Short Other Links to Shorturllink.in Links by Using your API. 
 
 Just Send me Any Post with Mdisk or Other Links. I will Convert Those Links Using Your API and Send them Back To You. I work in Channels too. 
 
@@ -56,7 +56,7 @@ ABOUT_TEXT = """
     
 `📝 Language:` [Python 3](https://www.python.org/)
 `🧰 Framework:` [Pyrogram](https://github.com/pyrogram/pyrogram)
-`👨‍💻 Developer:` [Dev](t.me/potter_00)
+`👨‍💻 Developer:` [Dev](t.me/anjel_neha)
 `)
 
 """
@@ -67,9 +67,9 @@ Current Method: {method}
     
 Methods Available:
 
-> `mdlink` - Change all the links of the post to your MDisk account first and then short to droplink.co link.
+> `mslink` - Change all the links of the post to your MDisk account first and then short to shorturllink.in link.
 
-> `droplink` - Short all the links of the post to droplink.co link directly.
+> `shorturllink` - Short all the links of the post to shorturllink.in link directly.
 
 > `mdisk` - Save all the links of the post to your Mdisk account.
     
@@ -92,7 +92,7 @@ List of Admins who has access to this Bot
 OTHER_INFO_MESSAGE = """
 **Current Method**: `{method}`
 
-**Droplink API**: `{droplink_api}`
+**Shorturllink API**: `{shorturllink_api}`
 
 **MDisk API**: `{mdisk_api}`
 
@@ -170,8 +170,8 @@ START_MESSAGE_REPLY_MARKUP  = InlineKeyboardMarkup([
 
 METHOD_REPLY_MARKUP = InlineKeyboardMarkup([
     [
-        InlineKeyboardButton('MDLINK', callback_data=f'change_method#mdlink'),
-        InlineKeyboardButton('Droplink', callback_data='change_method#droplink'),
+        InlineKeyboardButton('MSLINK', callback_data=f'change_method#mslink'),
+        InlineKeyboardButton('Shorturllink', callback_data='change_method#shorturllink'),
         InlineKeyboardButton('Mdisk', callback_data='change_method#mdisk')
     ],
         [
