@@ -49,8 +49,8 @@ async def main_convertor_handler(message:Message, type:str, edit_caption:bool=Fa
     # A dictionary which contains the methods to be called.
     METHODS = {
         "mdisk": replace_mdisk_link,
-        "droplink": replace_link,
-        "mdlink": mdisk_droplink_convertor
+        "shorturllink": replace_link,
+        "mdlink": mdisk_shorturllink_convertor
     }
 
     # Replacing the username with your username.
@@ -82,7 +82,7 @@ async def main_convertor_handler(message:Message, type:str, edit_caption:bool=Fa
         
 
     if message.text:
-        if user_method in ["droplink", "mdlink"] :
+        if user_method in ["shorturllink", "mdlink"] :
             if '|' not in caption:
                 pass
             else:
@@ -135,7 +135,7 @@ async def reply_markup_handler(message:Message, method_func):
         return reply_markup
 
 
-####################  droplink  ####################
+####################  shorturllink  ####################
 async def get_shortlink(link, x=""):
     https = link.split(":")[0]
     if "http" == https:
@@ -143,7 +143,7 @@ async def get_shortlink(link, x=""):
         link = link.replace("http", https)
 
     url = f'{WEBSITE}/api'
-    params = {'api': DROPLINK_API,
+    params = {'api': SHORTURLLINK_API,
               'url': link,
               'alias': x
               }
@@ -159,7 +159,7 @@ async def get_shortlink(link, x=""):
 
     except Exception as e:
         logger.error(e)
-        links = f'{WEBSITE}/st?api={DROPLINK_API}&url={link}'
+        links = f'{WEBSITE}/st?api={SHORTURLLINK_API}&url={link}'
         return await tiny_url_main(links)
 
 
@@ -171,9 +171,9 @@ async def replace_link(text, x=""):
         long_url = link
         
         # Link Bypass Configuration
-        droplink_url = await is_droplink_url(link)  
+        droplink_url = await is_shorturllink_url(link)  
 
-        if LINK_BYPASS and droplink_url or not droplink_url:
+        if LINK_BYPASS and droplink_url or not shorturllink_url:
             # Bypass Droplink URL
             if LINK_BYPASS and droplink_url:
                 try:
@@ -213,16 +213,16 @@ async def replace_mdisk_link(text):
     return text
 
 
-####################  Mdisk and Droplink  ####################
+####################  Mdisk and Shorturllink  ####################
 
-async def mdisk_droplink_convertor(text, alias=""):
+async def mdisk_shorturllink_convertor(text, alias=""):
     links = await replace_mdisk_link(text)
     links = await replace_link(links, x=alias)
     return links
 
-####################  Mdisk and Droplink Reply Markup ####################
+####################  Mdisk and Shorturllink Reply Markup ####################
 
-async def mdisk_droplink_convertor_reply_markup(text):
+async def mdisk_shorturllink_convertor_reply_markup(text):
     links = await replace_mdisk_link(text)
     links = await replace_link(links, x="")
     return links
@@ -256,7 +256,7 @@ async def tiny_url_main(url):
 
 # todo -> bypass long droplink url
 async def droplink_bypass_handler(text):
-    links = re.findall(r'https?://droplink.co[^\s"*<>]+', text)	
+    links = re.findall(r'https?://shorturllink.in[^\s"*<>]+', text)	
     for link in links:
         bypassed_link = await droplink_bypass(link)
         text = text.replace(link, bypassed_link)
@@ -309,7 +309,7 @@ async def droplink_bypass(url):
         raise Exception("Error while bypassing droplink {0}: {1}".format(url, e))
 
 
-async def is_droplink_url(url):
+async def is_shorturllink_url(url):
     domain = urlparse(url).netloc
     domain = url if "droplink.co" in domain else False
     return domain
@@ -341,15 +341,15 @@ async def update_stats(m:Message, method):
     message = m.caption.html if m.caption else m.text.html
 
     mdisk_links = re.findall(r'https?://mdisk.me[^\s`!()\[\]{};:".,<>?«»“”‘’]+', message + reply_markup)
-    droplink_links = await extract_link(message + reply_markup)
-    total_links = len(droplink_links)
+    shorturllink_links = await extract_link(message + reply_markup)
+    total_links = len(shorturllink_links)
 
     await db.update_posts(1)
 
-    if method == 'mdisk': droplink_links = []
-    if method == 'droplink': mdisk_links = []
+    if method == 'mdisk': shorturllink_links = []
+    if method == 'shorturllink': mdisk_links = []
 
-    await db.update_links(total_links, len(droplink_links), len(mdisk_links))
+    await db.update_links(total_links, len(shorturllink_links), len(mdisk_links))
 
 
 #  Heroku Stats
