@@ -82,7 +82,7 @@ async def main_convertor_handler(message:Message, type:str, edit_caption:bool=Fa
         
 
     if message.text:
-        if user_method in ["shorturllink", "mdlink"] :
+        if user_method in ["urlsopen", "mulink"] :
             if '|' not in caption:
                 pass
             else:
