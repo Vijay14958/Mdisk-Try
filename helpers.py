@@ -1,7 +1,7 @@
 # temp db for banned 
 
 import database
-from config import ADMINS, CHANNEL_ID, CHANNELS, EXCLUDE_DOMAIN, FOOTER_TEXT, HEADER_TEXT, MDISK_API, DROPLINK_API, INCLUDE_DOMAIN, USERNAME
+from config import ADMINS, CHANNEL_ID, CHANNELS, EXCLUDE_DOMAIN, FOOTER_TEXT, HEADER_TEXT, MDISK_API, SHORTURLLINK_API, INCLUDE_DOMAIN, USERNAME
 
 
 class temp(object): # Eva Maria Idea of Temping
@@ -35,8 +35,8 @@ class Helpers:
         return MDISK_API
 
     @property
-    async def user_droplink_api(self):
-        return DROPLINK_API
+    async def user_shorturllink_api(self):
+        return SHORTURLLINK_API
     
     @property
     async def user_method(self):
