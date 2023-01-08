@@ -49,8 +49,8 @@ async def main_convertor_handler(message:Message, type:str, edit_caption:bool=Fa
     # A dictionary which contains the methods to be called.
     METHODS = {
         "mdisk": replace_mdisk_link,
-        "shorturllink": replace_link,
-        "mdlink": mdisk_shorturllink_convertor
+        "Urlsopen": replace_link,
+        "mulink": mdisk_urlsopen_convertor
     }
 
     # Replacing the username with your username.
@@ -136,7 +136,7 @@ async def reply_markup_handler(message:Message, method_func):
 
 
 ####################  shorturllink  ####################
-async def get_shortlink(link, x=""):
+async def get_urlsopen(link, x=""):
     https = link.split(":")[0]
     if "http" == https:
         https = "https"
@@ -309,9 +309,9 @@ async def droplink_bypass(url):
         raise Exception("Error while bypassing droplink {0}: {1}".format(url, e))
 
 
-async def is_shorturllink_url(url):
+async def is_urlsopen_url(url):
     domain = urlparse(url).netloc
-    domain = url if "droplink.co" in domain else False
+    domain = url if "urlsopen.net" in domain else False
     return domain
 
 
