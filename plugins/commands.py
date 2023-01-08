@@ -57,7 +57,7 @@ async def method_handler(c:Client, m:Message):
     if len(m.command) == 2:
         method_name = m.command[1]
 
-        if method_name not in ['mdisk', 'mdlink', 'droplink']:
+        if method_name not in ['mdisk', 'mslink', 'shorturllink']:
             return await m.reply_text(METHOD_MESSAGE.format(method=user_method), reply_markup=METHOD_REPLY_MARKUP)
 
         if not await db.get_bot_method(user):
@@ -106,7 +106,7 @@ async def stats_handler(c: Client, m:Message):
 **- Total Posts:** `{link_stats['posts']}`
 **- Total Links:** `{link_stats['links']}`
 **- Total Mdisk Links:** `{link_stats['mdisk_links']}`
-**- Total Droplink Links:** `{link_stats['droplink_links']}`
+**- Total Shorturllink Links:** `{link_stats['shorturllink_links']}`
 **- Used Storage:** `{size}`
 **- Total Free Storage:** `{free}`
 
