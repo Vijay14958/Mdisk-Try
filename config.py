@@ -11,8 +11,8 @@ def is_enabled(value, default):
 # Mandatory variables for the bot to start
 API_ID = int(os.environ.get("API_ID", "27639102"))
 API_HASH = os.environ.get("API_HASH", "35142c1407be6264e68fb6bec5dcabd9")
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "5611446937:AAFxbSH0bg7EoNu3jpU951Ya_Z12pcY4ZH4")
-SHORTURLLINK_API = os.environ.get("DROPLINK_API")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "5989520450:AAHvoDRAwNLESGGzxhYqe9JpXliJ7_SvNUQ")
+SHORTURLLINK_API = os.environ.get("1f51a932dc779365263176c7916dc28cb706dac7")
 MDISK_API = os.environ.get("MDISK_API", "t7Dgnd4HOeAXPZHSJoym")
 ADMINS = list(int(i.strip()) for i in os.environ.get("ADMINS").split(",")) if os.environ.get("ADMINS") else []
 DATABASE_NAME = os.environ.get("DATABASE_NAME", "MdiskConvertornehaBot")
