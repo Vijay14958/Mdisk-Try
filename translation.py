@@ -13,7 +13,7 @@ Ex: `/batch -100xxx`
 
 START_MESSAGE = '''Hello, {}
 
-I'm a Bot to Convert Other MDisk Links to your MDisk Links or Short Other Links to Shorturllink.in Links by Using your API. 
+I'm a Bot to Convert Other MDisk Links to your MDisk Links or Short Other Links to Mdisklink.link Links by Using your API. 
 
 Just Send me Any Post with Mdisk or Other Links. I will Convert Those Links Using Your API and Send them Back To You. I work in Channels too. 
 
@@ -170,7 +170,7 @@ START_MESSAGE_REPLY_MARKUP  = InlineKeyboardMarkup([
 
 METHOD_REPLY_MARKUP = InlineKeyboardMarkup([
     [
-        InlineKeyboardButton('MMLINK', callback_data=f'change_method#mslink'),
+        InlineKeyboardButton('MMLINK', callback_data=f'change_method#mmlink'),
         InlineKeyboardButton('Mdisklink', callback_data='change_method#mdisklink'),
         InlineKeyboardButton('Mdisk', callback_data='change_method#mdisk')
     ],
