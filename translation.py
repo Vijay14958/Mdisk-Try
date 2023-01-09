@@ -67,9 +67,9 @@ Current Method: {method}
     
 Methods Available:
 
-> `mslink` - Change all the links of the post to your MDisk account first and then short to shorturllink.in link.
+> `mmlink` - Change all the links of the post to your MDisk account first and then short to MdiskLink.link link.
 
-> `shorturllink` - Short all the links of the post to shorturllink.in link directly.
+> `mdisklink` - Short all the links of the post to MdiskLink.link link directly.
 
 > `mdisk` - Save all the links of the post to your Mdisk account.
     
@@ -92,7 +92,7 @@ List of Admins who has access to this Bot
 OTHER_INFO_MESSAGE = """
 **Current Method**: `{method}`
 
-**Shorturllink API**: `{shorturllink_api}`
+**Mdisklink API**: `{mdisklink_api}`
 
 **MDisk API**: `{mdisk_api}`
 
@@ -170,8 +170,8 @@ START_MESSAGE_REPLY_MARKUP  = InlineKeyboardMarkup([
 
 METHOD_REPLY_MARKUP = InlineKeyboardMarkup([
     [
-        InlineKeyboardButton('MSLINK', callback_data=f'change_method#mslink'),
-        InlineKeyboardButton('Shorturllink', callback_data='change_method#shorturllink'),
+        InlineKeyboardButton('MMLINK', callback_data=f'change_method#mslink'),
+        InlineKeyboardButton('Mdisklink', callback_data='change_method#mdisklink'),
         InlineKeyboardButton('Mdisk', callback_data='change_method#mdisk')
     ],
         [
