@@ -215,14 +215,14 @@ async def replace_mdisk_link(text):
 
 ####################  Mdisk and Mdisklink  ####################
 
-async def mdisk_urlsopen_convertor(text, alias=""):
+async def mdisk_mdisklink_convertor(text, alias=""):
     links = await replace_mdisk_link(text)
     links = await replace_link(links, x=alias)
     return links
 
 ####################  Mdisk and Mdisklink Reply Markup ####################
 
-async def mdisk_urlsopen_convertor_reply_markup(text):
+async def mdisk_mdisklink_convertor_reply_markup(text):
     links = await replace_mdisk_link(text)
     links = await replace_link(links, x="")
     return links
