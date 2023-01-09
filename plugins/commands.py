@@ -45,7 +45,7 @@ async def help_command(c, m):
 async def about_command(c, m):
     bot = await c.get_me()
     if WELCOME_IMAGE:
-        return await m.reply_photo(photo=WELCOME_IMAGE, caption=ABOUT_TEXT.format(bot.mention(style='md')), reply_markup=ABOUT_REPLY_MARKUP, disable_web_page_preview=True)
+        return await m.reply_photo(photo=WELCOME_IMAGE, caption=ABOUT_TEXT.format(bot.mention(style='mm')), reply_markup=ABOUT_REPLY_MARKUP, disable_web_page_preview=True)
     await m.reply_text(ABOUT_TEXT.format(bot.mention(style='md')), reply_markup=ABOUT_REPLY_MARKUP, disable_web_page_preview=True)
 
 @Client.on_message(filters.command('method') & filters.user(ADMINS) & filters.private)
@@ -57,7 +57,7 @@ async def method_handler(c:Client, m:Message):
     if len(m.command) == 2:
         method_name = m.command[1]
 
-        if method_name not in ['mdisk', 'mslink', 'shorturllink']:
+        if method_name not in ['mdisk', 'mmlink', 'mdisklink']:
             return await m.reply_text(METHOD_MESSAGE.format(method=user_method), reply_markup=METHOD_REPLY_MARKUP)
 
         if not await db.get_bot_method(user):
