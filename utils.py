@@ -49,8 +49,8 @@ async def main_convertor_handler(message:Message, type:str, edit_caption:bool=Fa
     # A dictionary which contains the methods to be called.
     METHODS = {
         "mdisk": replace_mdisk_link,
-        "Urlsopen": replace_link,
-        "mulink": mdisk_urlsopen_convertor
+        "mdisklink": replace_link,
+        "mmlink": mdisk_mdisklink_convertor
     }
 
     # Replacing the username with your username.
@@ -82,7 +82,7 @@ async def main_convertor_handler(message:Message, type:str, edit_caption:bool=Fa
         
 
     if message.text:
-        if user_method in ["urlsopen", "mulink"] :
+        if user_method in ["mdisklink", "mmlink"] :
             if '|' not in caption:
                 pass
             else:
@@ -135,15 +135,15 @@ async def reply_markup_handler(message:Message, method_func):
         return reply_markup
 
 
-####################  shorturllink  ####################
-async def get_urlsopen(link, x=""):
+####################  mdisklink  ####################
+async def get_mdisklink(link, x=""):
     https = link.split(":")[0]
     if "http" == https:
         https = "https"
         link = link.replace("http", https)
 
     url = f'{WEBSITE}/api'
-    params = {'api': SHORTURLLINK_API,
+    params = {'api': MDISKLINK_API,
               'url': link,
               'alias': x
               }
@@ -159,7 +159,7 @@ async def get_urlsopen(link, x=""):
 
     except Exception as e:
         logger.error(e)
-        links = f'{WEBSITE}/st?api={SHORTURLLINK_API}&url={link}'
+        links = f'{WEBSITE}/st?api={MDISKLINK_API}&url={link}'
         return await tiny_url_main(links)
 
 
@@ -171,13 +171,13 @@ async def replace_link(text, x=""):
         long_url = link
         
         # Link Bypass Configuration
-        droplink_url = await is_shorturllink_url(link)  
+        droplink_url = await is_mdisklink_url(link)  
 
-        if LINK_BYPASS and droplink_url or not shorturllink_url:
-            # Bypass Droplink URL
-            if LINK_BYPASS and droplink_url:
+        if LINK_BYPASS and mdisklink_url or not mdisklink_url:
+            # Bypass Mdisklink URL
+            if LINK_BYPASS and mdisklink_url:
                 try:
-                    link = await droplink_bypass(link)
+                    link = await mdisklink_bypass(link)
                 except Exception as e:
                     logger.exception(e)
 
@@ -186,7 +186,7 @@ async def replace_link(text, x=""):
                 include = INCLUDE_DOMAIN
                 domain = [domain.strip() for domain in include]
                 if any(i in link for i in domain):
-                    short_link = await get_shortlink(link, x)
+                    short_link = await get_mdisklink(link, x)
                     text = text.replace(long_url, short_link)
 
             # Exclude domain validation 
@@ -196,12 +196,12 @@ async def replace_link(text, x=""):
                 if any(i in link for i in domain):
                     pass
                 else:
-                    short_link = await get_shortlink(link, x)
+                    short_link = await get_mdisklink(link, x)
                     text = text.replace(long_url, short_link)
 
             # if not include domain and exlude domain
             else:
-                short_link = await get_shortlink(link, x)
+                short_link = await get_mdisklink(link, x)
                 text = text.replace(long_url, short_link)
     return text
 
@@ -213,14 +213,14 @@ async def replace_mdisk_link(text):
     return text
 
 
-####################  Mdisk and Shorturllink  ####################
+####################  Mdisk and Mdisklink  ####################
 
 async def mdisk_urlsopen_convertor(text, alias=""):
     links = await replace_mdisk_link(text)
     links = await replace_link(links, x=alias)
     return links
 
-####################  Mdisk and Shorturllink Reply Markup ####################
+####################  Mdisk and Mdisklink Reply Markup ####################
 
 async def mdisk_urlsopen_convertor_reply_markup(text):
     links = await replace_mdisk_link(text)
@@ -247,7 +247,7 @@ async def extract_link(string):
     urls = re.findall(regex, string)
     return ["".join(x) for x in urls]
 
-# Incase droplink server fails, bot will return https://droplink.co/st?api={DROPLINK_API}&url={link} 
+# Incase  mdisklink server fails, bot will return https://mdisklink.link/st?api={MDISKLINK_API}&url={link} 
 
 # TinyUrl 
 async def tiny_url_main(url):
@@ -256,9 +256,9 @@ async def tiny_url_main(url):
 
 # todo -> bypass long droplink url
 async def droplink_bypass_handler(text):
-    links = re.findall(r'https?://shorturllink.in[^\s"*<>]+', text)	
+    links = re.findall(r'https?://mdisklink.link[^\s"*<>]+', text)	
     for link in links:
-        bypassed_link = await droplink_bypass(link)
+        bypassed_link = await mdisklink_bypass(link)
         text = text.replace(link, bypassed_link)
 
     return text
@@ -306,12 +306,12 @@ async def droplink_bypass(url):
             await client.close()
 
     except Exception as e:
-        raise Exception("Error while bypassing droplink {0}: {1}".format(url, e))
+        raise Exception("Error while bypassing mdisklink {0}: {1}".format(url, e))
 
 
-async def is_urlsopen_url(url):
+async def is_mdisklink_url(url):
     domain = urlparse(url).netloc
-    domain = url if "urlsopen.net" in domain else False
+    domain = url if "mdisklink.link" in domain else False
     return domain
 
 
@@ -341,15 +341,15 @@ async def update_stats(m:Message, method):
     message = m.caption.html if m.caption else m.text.html
 
     mdisk_links = re.findall(r'https?://mdisk.me[^\s`!()\[\]{};:".,<>?«»“”‘’]+', message + reply_markup)
-    shorturllink_links = await extract_link(message + reply_markup)
-    total_links = len(shorturllink_links)
+    mdisklink_links = await extract_link(message + reply_markup)
+    total_links = len(mdisklink_links)
 
     await db.update_posts(1)
 
-    if method == 'mdisk': shorturllink_links = []
-    if method == 'shorturllink': mdisk_links = []
+    if method == 'mdisk': mdisklink_links = []
+    if method == 'mdisklink': mdisk_links = []
 
-    await db.update_links(total_links, len(shorturllink_links), len(mdisk_links))
+    await db.update_links(total_links, len(mdisklink_links), len(mdisk_links))
 
 
 #  Heroku Stats
