@@ -35,7 +35,7 @@ async def help_command(c, m):
             firstname=temp.FIRST_NAME,
             username=temp.BOT_USERNAME,
             repo=SOURCE_CODE,
-            owner="@potter_00" )
+            owner="@Anjel_Neha" )
     if WELCOME_IMAGE:
         return await m.reply_photo(photo=WELCOME_IMAGE, caption=s, reply_markup=HELP_REPLY_MARKUP)
     await m.reply_text(s, reply_markup=HELP_REPLY_MARKUP, disable_web_page_preview=True)
@@ -106,7 +106,7 @@ async def stats_handler(c: Client, m:Message):
 **- Total Posts:** `{link_stats['posts']}`
 **- Total Links:** `{link_stats['links']}`
 **- Total Mdisk Links:** `{link_stats['mdisk_links']}`
-**- Total Shorturllink Links:** `{link_stats['shorturllink_links']}`
+**- Total Mdisklink Links:** `{link_stats['mdisklink_links']}`
 **- Used Storage:** `{size}`
 **- Total Free Storage:** `{free}`
 
